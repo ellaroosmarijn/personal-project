@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "express": "^4.17.2",
+    "openai": "^3.2.1",
     "ts-node": "^10.9.1"
   },
   "prettier": {
