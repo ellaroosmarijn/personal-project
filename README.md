@@ -1,24 +1,15 @@
-# React Boilerplate
+# Two Minds One
+Two Minds One is a website that aims to bridge the gaps between minds by providing a platform for people to practise empathy and conflict minimisation.
 
-## Packages Included
+Two Minds One uses cutting edge GPT technology to enable accurate political viewpoint analysis and empathy rating.
 
-- react (webpack, babel, etc.)
-- react-router-dom
-- express
-- jest
-- eslint
+## Environment Variables
+|Name|Description|
+|-|-|
+|`OPENAI_API_KEY`|OpenAI ChatGPT API Key|
 
-## Setup
-
-- [ ] Clone this repo, navigate to it, install packages, and start the server with `npm run dev`
-  <details style="padding-left: 2em">
-    <summary>Tip</summary>
-
-    ```sh
-    npm install
-    npm run dev
-    ```
-  </details>
-
----
-[Provide feedback on this repo](https://docs.google.com/forms/d/e/1FAIpQLSfw4FGdWkLwMLlUaNQ8FtP2CTJdGDUv6Xoxrh19zIrJSkvT4Q/viewform?usp=pp_url&entry.1958421517=boilerplate-react)
+## Commands
+Useful commands. For a full command list run `npm run`.
+|Name|Description|
+|-|-|
+|`[ENV VARS] npm run dev`|Start development server|
