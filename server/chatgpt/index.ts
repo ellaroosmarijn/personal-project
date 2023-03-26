@@ -33,6 +33,9 @@ function processPrompt(prompt: string) {
         throw 'Error'
       }
     })
+    .catch((err) => {
+      console.dir(err, { depth: null })
+    })
 }
 
 // take user input and return a chatGPT prompt
@@ -62,7 +65,7 @@ function getPrompt(viewpoint: string, topic: string, text: string) {
 // take chatGPT response string, validate, and return ChatGptResponse object
 const gptResponseRegex = /([0-5])\/5\. (.+)/gm
 function parseResponse(response: string): ChatGptResponse | null {
-  const match = response.match(gptResponseRegex)
+  const match = gptResponseRegex.exec(response)
   if (match) {
     return { rating: Number(match[1]), justification: match[2] }
   }
