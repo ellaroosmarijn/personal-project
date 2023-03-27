@@ -24,8 +24,6 @@ function processPrompt(prompt: string) {
       stop: ['\n'],
     })
     .then((response) => {
-      console.dir(response.data, { depth: null })
-
       const choice = response.data.choices[0]
       if (choice) {
         return choice.text

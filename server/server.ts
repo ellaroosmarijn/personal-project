@@ -11,4 +11,8 @@ server.use('/api/v1', routes)
 
 server.use(express.static(join(__dirname, 'public')))
 
+server.use((_, res) => {
+  res.sendFile(join(__dirname, 'public', 'index.html'))
+})
+
 export default server
