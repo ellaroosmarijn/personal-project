@@ -1,7 +1,7 @@
 import type { ThunkAction } from '../store'
 
 import { Score, Answer } from '../../shared/types'
-import { scoreAnswerApi } from '../api/index'
+import { scoreAnswerApi } from '../api'
 
 export const GET_SCORE_PENDING = 'GET_SCORE_PENDING'
 export const GET_SCORE_FULFILLED = 'GET_SCORE_FULFILLED'
