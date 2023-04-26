@@ -1,9 +1,5 @@
 import { Configuration, OpenAIApi } from 'openai'
-
-export interface ChatGptResponse {
-  rating: number
-  justification: string
-}
+import { Score } from '../../shared/types'
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -28,7 +24,7 @@ function processPrompt(prompt: string) {
       if (choice) {
         return choice.text
       } else {
-        throw 'Error'
+        return null
       }
     })
     .catch((err) => {
@@ -62,7 +58,7 @@ function getPrompt(viewpoint: string, topic: string, text: string) {
 
 // take chatGPT response string, validate, and return ChatGptResponse object
 const gptResponseRegex = /([0-5])\/5\. (.+)/gm
-function parseResponse(response: string): ChatGptResponse | null {
+function parseResponse(response: string): Score | null {
   const match = gptResponseRegex.exec(response)
   if (match) {
     return { rating: Number(match[1]), justification: match[2] }
@@ -75,11 +71,13 @@ export async function rateUserInput(
   viewpoint: string,
   topic: string,
   text: string
-): Promise<ChatGptResponse | null> {
+): Promise<Score | null> {
   const prompt = getPrompt(viewpoint, topic, text)
   const response = await processPrompt(prompt)
   if (!response) {
-    return null
+    throw Error(
+      'The AI is unsure how to respond. Please edit your answer and try again.'
+    )
   }
   return parseResponse(response)
 }
