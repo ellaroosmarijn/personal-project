@@ -1,13 +1,13 @@
 import { MouseEvent, useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { Group, Title, LoadingOverlay } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 
 import { MANTINE_NOTIFICATION_ERROR_TITLE } from '../../shared/constants'
 
 import IdeologyButton from './IdeologyButton'
 import MantineBox from './Box'
-import { Group, Title, LoadingOverlay } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 import { viewpointApi as setViewpoint } from '../api/index'
 
 const LOADER_PROPS = {
