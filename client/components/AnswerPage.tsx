@@ -1,61 +1,66 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
-import { Answer } from '../../shared/types'
-import { scoreAnswer } from '../utilities/api'
+import { useState, FormEvent } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { Textarea, Title, Button, Group, Box } from '@mantine/core'
+import { useForm } from '@mantine/form'
 
-const initialAnswer: Answer = {
-  viewpoint: '',
-  topic: '',
-  text: '',
-}
+import MantineBox from './Box'
+import { Answer } from '../../shared/types'
+import { scoreAnswerApi } from '../api'
 
 export default function UserAnswerPage() {
-  const [answer, setAnswer] = useState<Answer>(initialAnswer)
+  const [answer, setAnswer] = useState<Answer>('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target
-    const newForm = { ...answer, [name]: value }
-    setAnswer(newForm)
-  }
+  const form = useForm({
+    initialValues: {
+      Answer: '',
+    },
+  })
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    setLoading(true)
+    setError('')
     try {
-      const userAnswerScore = await scoreAnswer(answer)
-      console.log(userAnswerScore)
-    } catch (error) {
-      console.log(error)
+      await scoreAnswerApi(answer)
+    } catch (e) {
+      let message = ''
+      if (axios.isAxiosError(e)) {
+        message = e.message
+      } else {
+        message = typeof e === 'string' ? e : 'An unknown error occurred.'
+      }
+      setError(message)
     }
+    setLoading(false)
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="Viewpoint">
-          Viewpoint:
-          <input
-            onChange={(event) => handleChange(event)}
-            value={answer.viewpoint}
-            name="viewpoint"
+      {error}
+      <MantineBox>
+        <Title order={2}>
+          Explain the INSERT VIEWPOINT view on INSERT TOPIC.
+        </Title>
+      </MantineBox>
+      <Box maw={1370} mx="auto">
+        <form onSubmit={handleSubmit}>
+          <Textarea
+            disabled={loading}
+            aria-label="Answer Field"
+            placeholder="Your Answer"
+            {...form.getInputProps('answer')}
           />
-        </label>
-        <label htmlFor="topic">
-          Topic:
-          <input
-            onChange={(event) => handleChange(event)}
-            value={answer.topic}
-            name="topic"
-          />
-        </label>
-        <label htmlFor="text">
-          Text:
-          <input
-            onChange={(event) => handleChange(event)}
-            value={answer.text}
-            name="text"
-          />
-        </label>
-        <button>Submit</button>
-      </form>
+
+          <Group position="right" mt="md">
+            <Button component={Link} to="/score">
+              Submit
+            </Button>
+          </Group>
+        </form>
+      </Box>
     </>
   )
 }
