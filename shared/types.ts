@@ -12,3 +12,9 @@ export interface Score {
   rating: number
   justification: string
 }
+
+export type Viewpoint = string
+
+export interface ChildrenProps {
+  children: React.ReactNode | React.ReactNode[]
+}
