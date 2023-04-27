@@ -12,6 +12,9 @@ import myTheme from '../theme'
 import AnswerPage from './AnswerPage'
 import Header from './Header'
 import PageFooter from './PageFooter'
+import Homepage from './HomePage'
+import FeedbackPage from './FeedbackPage'
+import SelectionPage from './SelectionPage'
 
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -38,7 +41,10 @@ function App() {
         <AppShell fixed header={<Header />}>
           <Notifications />
           <Routes>
+            <Route path="/" element={<Homepage />} />
             <Route path="/answer" element={<AnswerPage />} />
+            <Route path="/score" element={<FeedbackPage />} />
+            <Route path="/ideology" element={<SelectionPage />} />
             <Route
               path="*"
               element={
