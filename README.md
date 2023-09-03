@@ -55,11 +55,11 @@ Feature roadmap for Two Minds One:
 Feature roadmap for Two Minds One:
 
 1. **User Preferences:**
-   - [ ] Select political group (conservative or liberal).
+   - [x] Select political group (conservative or liberal).
 
 2. **Answering Prompts:**
-   - [ ] Respond to random prompts from an alternative perspective.
-   - [ ] Rate answers out of five, with justification and feedback.
+   - [x] Respond to random prompts from an alternative perspective.
+   - [x] Rate answers out of five, with justification and feedback.
 
 3. **Data Storage and Retrieval:**
    - [ ] Anonymously save user scores.
